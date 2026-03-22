@@ -46,3 +46,44 @@ WHERE Indicerendimento IN (8.45 , 9.03)
 SELECT Nomaluno
 FROM ALUNO
 WHERE Indicerendimento NOT IN (8.45 , 9.03)
+
+-- Uso do IS NULL e IS NOT NULL
+
+INSERT INTO aluno (Nomaluno,Datanasc,cpf,email) VALUES ('PEDRO', '2005/12/20','99999999999','joao@gmail.com');
+SELECT * FROM aluno ORDER BY Codaluno ASC;
+
+SELECT Nomaluno FROM aluno WHERE indiceRendimento IS NULL;
+SELECT Nomaluno FROM aluno WHERE indiceRendimento IS NOT NULL;
+
+-- Uso do MIN e MAX
+
+SELECT MIN(indiceRendimento), MAX(indiceRendimento) FROM aluno;
+
+SELECT Nomaluno, indiceRendimento
+FROM aluno
+WHERE indiceRendimento = (SELECT MIN(indiceRendimento) FROM aluno)
+
+UNION ALL
+
+SELECT Nomaluno, indiceRendimento
+FROM aluno
+WHERE indiceRendimento = (SELECT MAX(indiceRendimento) FROM aluno);
+
+-- Uso do SUM soma
+
+SELECT SUM(indiceRendimento) FROM aluno;
+
+-- Uso do AVG media
+
+SELECT AVG(indiceRendimento) FROM aluno;
+
+-- Uso de aliases apelidos (AS)
+
+SELECT Nomaluno AS Nome_do_aluno FROM aluno;
+SELECT Nomaluno Nome_do_aluno FROM aluno;
+
+SELECT SUM(indiceRendimento) AS Soma_dos_indices FROM aluno;
+SELECT SUM(indiceRendimento) FROM aluno;
+
+SELECT a.Nomaluno, a.Codaluno
+From aluno AS a;

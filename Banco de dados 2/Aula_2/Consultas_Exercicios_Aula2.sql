@@ -1,30 +1,34 @@
 --1) Listar os nomes dos alunos.
 
-
+SELECT Nomaluno FROM aluno;
 
 --2) Listar os nomes e a data de nascimento. 
 
-
+SELECT Nomaluno, Datanasc FROM aluno;
 
 --3) Listar os nomes e códigos dos alunos com índice de rendimento maior do que 7. 
 
-
+SELECT Nomaluno, Codaluno FROM aluno WHERE indiceRendimento > 7;
 
 --4) Alterar o nome da aluna Ana para Ana Beatriz. 
 
-
+UPDATE aluno SET Nomaluno = 'ANA BEATRIZ' WHERE Nomaluno = 'ANA';
+SELECT * FROM aluno;
 
 --5) Alterar o índice de rendimento de todos os alunos acrescentando 10%. 
 
-
+UPDATE aluno SET indiceRendimento = indiceRendimento * 1.1;
+SELECT * FROM aluno;
 
 --6) Alterar a data de nascimento da aluna Maria para 30/11/1996. 
 
-
+UPDATE aluno SET Datanasc = '30/11/1996' WHERE Nomaluno = 'MARIA';
+UPDATE aluno SET Datanasc = '1996-11-30' WHERE Nomaluno = 'MARIA';
+SELECT * FROM aluno;
 
 --7) Listar os nomes e e-mails dos alunos que nasceram depois de 1990.
 
-
+SELECT Nomaluno, email FROM aluno WHERE (extract(year from datanasc)>'1990');
 
 --8) Excluir os dados dos alunos com índice de rendimento menor que 6. 
 
