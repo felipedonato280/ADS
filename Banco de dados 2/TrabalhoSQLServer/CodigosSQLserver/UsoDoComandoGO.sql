@@ -1,0 +1,6 @@
+DECLARE @x INT = 10;
+GO
+SELECT @x;
+
+PRINT 'Teste';
+GO 3
