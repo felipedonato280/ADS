@@ -51,7 +51,7 @@ public class Horario {
 
         input.close();
 
-        int intervalo = calcularDiferenca(inicio, fim);
+        int intervalo = Horario.calcularDiferenca(inicio, fim);
         System.out.println("O intervalo resultante é de " + intervalo + " minutos");
     }
 }
