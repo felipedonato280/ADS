@@ -2,8 +2,11 @@
 
 public class Ex4 {
     public static void main(String[] args){
-        for(int i = 0; i <= 10; i++){
+        int soma = 1;
 
+        for(int i = 1; i <= 10; i++){
+            soma = i + i-1;
+            System.out.println(soma);
         }
     }
 }
