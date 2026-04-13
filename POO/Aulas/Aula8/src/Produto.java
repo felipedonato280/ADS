@@ -61,10 +61,22 @@ public class Produto {
     }
 
     public static void main(String[] args){
-        Produto prod01 = new Produto(100, "Coca Lata", "Bebidas", 2f);
-        Produto prod02 = new Produto(101, "Leite", "Bebidas", 1.5f, 6.5f);
+        Produto prod01 = new Produto(101, "Coca Lata", "Bebidas", 2f);
+        Produto prod02 = new Produto(102, "Leite", "Bebidas", 1.50f, 6.50f);
+        Produto prod03 = new Produto(103, "Doritos", "Salgadinhos", 3f, 12.50f);
+        Produto prod04 = new Produto(104, "Oreo", "Bolachas", 1.20f, 3f);
+        Produto prod05 = new Produto(105, "Ovos", "Outros", 1.99f, 11.99f);
+        Produto prod06 = new Produto(106, "Maça", "Frutas", 5.40f, 13f);
+        Produto prod07 = new Produto(107, "Carne", "Carnes", 25.50f, 42.80f);
+        Produto prod08 = new Produto(108, "Água", "Bebidas", 0.20f, 1.50f);
 
         System.out.println(prod01.toString());
         System.out.println(prod02.toString());
+        System.out.println(prod03.toString());
+        System.out.println(prod04.toString());
+        System.out.println(prod05.toString());
+        System.out.println(prod06.toString());
+        System.out.println(prod07.toString());
+        System.out.println(prod08.toString());
     }
 }

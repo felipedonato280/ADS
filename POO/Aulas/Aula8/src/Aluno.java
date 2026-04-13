@@ -109,9 +109,6 @@ public class Aluno{
         saida += "E-mail: " + email + "\n";
         saida += "Nº matricula: " + matricula + "\n";
 
-        // ALTERAÇÃO: interpretação do código do curso para exibição textual
-        // Em vez de imprimir o número, o código é traduzido para o nome do curso
-        // O uso das constantes torna a leitura mais clara e evita erros
         if (curso == CURSO_TPG)
             saida += "Curso Superior de Tecnologia em Processos Gerenciais\n";
         else if (curso == CURSO_ADS)
