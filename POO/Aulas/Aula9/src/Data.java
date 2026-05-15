@@ -19,7 +19,7 @@ class Data {
 
 
     /*
-     * Metodo construtor da classe.
+     * Método construtor da classe.
      * É executado automaticamente ao criar um objeto com "new".
      *
      * Aqui usamos os métodos setters ao invés de acessar diretamente
@@ -47,7 +47,7 @@ class Data {
     // =========================
 
     /*
-     * METODO SET (setDia)
+     * MÉTODO SET (setDia)
      *
      * Nomenclatura:
      * - Sempre começa com "set"
@@ -76,7 +76,7 @@ class Data {
 
 
     /*
-     * METODO GET (getDia)
+     * MÉTODO GET (getDia)
      *
      * Nomenclatura:
      * - Sempre começa com "get"
@@ -158,8 +158,8 @@ class Data {
         // A validação do setter corrige automaticamente
         Data hoje = new Data(15, 14, 2026);
 
-        System.out.printf( hoje.escreverAbreviado() );
-        System.out.printf( hoje.escreverExtenso() );
+        System.out.println( hoje.escreverAbreviado() );
+        System.out.println( hoje.escreverExtenso() );
 
 
         // Array de objetos
@@ -172,11 +172,10 @@ class Data {
         aulasPOO[4] = new Data(29, 4, 2026);
 
 
-        System.out.printf("A avalição ficou marcada para %s \n",
-                aulasPOO[3].escreverExtenso() );
+        System.out.printf("A avalição ficou marcada para %s \n", aulasPOO[3].escreverExtenso() );
 
 
-        System.out.printf("As aulas de POO em abril serão nas seguintes datas \n");
+        System.out.println("As aulas de POO em abril serão nas seguintes datas \n");
 
         for (int i = 0; i < aulasPOO.length; i++){
             System.out.printf("%s \n", aulasPOO[i].escreverAbreviado() );

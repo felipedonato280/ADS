@@ -1,65 +1,18 @@
 class Data {
-
-    // =========================
-    // ENCAPSULAMENTO DOS ATRIBUTOS
-    // =========================
-
-    // O modificador "private" impede o acesso direto aos atributos
-    // a partir de outras classes.
-    // Ou seja, ninguém pode fazer algo como: objeto.dia = 10;
-    // Isso força o uso de métodos (getters e setters),
-    // garantindo mais controle e validação dos dados.
-
-    // Se não fosse especificado nenhum modificador (public, private, etc),
-    // o Java utilizaria o acesso padrão (public), que é o mais permisso
-
     private int dia;
     private int mes;
     private int ano;
 
-
-    /*
-     * Método construtor da classe.
-     * É executado automaticamente ao criar um objeto com "new".
-     *
-     * Aqui usamos os métodos setters ao invés de acessar diretamente
-     * os atributos, garantindo que as validações sejam aplicadas.
-     */
-    public Data (int dia, int mes, int ano) {
-        // depois que foram criados os métodos set, basta chamar os respectivos
-        // métodos para garantir que a validação seja executada
+    public Data (int dia, int mes) {
         setMes(mes);
         setDia(dia);
+    }
+
+    public Data (int dia, int mes, int ano) {
+        this(dia, mes);
         setAno(ano);
     }
 
-
-    // Sobrecarga (overload) de construtor
-    // Mesmo nome, parâmetros diferentes
-    public Data (int dia, int mes) {
-        setDia(dia);
-        setMes(mes);
-    }
-
-
-    // =========================
-    // GETTERS E SETTERS
-    // =========================
-
-    /*
-     * MÉTODO SET (setDia)
-     *
-     * Nomenclatura:
-     * - Sempre começa com "set"
-     * - Seguido do nome do atributo (Dia → setDia)
-     *
-     * Tipo:
-     * - void (não retorna valor)
-     *
-     * Função:
-     * - Alterar o valor do atributo
-     * - Aplicar validações antes de salvar o valor
-     */
     public void setDia(int dia) {
 
         // Array com quantidade de dias por mês
@@ -74,21 +27,6 @@ class Data {
         }
     }
 
-
-    /*
-     * MÉTODO GET (getDia)
-     *
-     * Nomenclatura:
-     * - Sempre começa com "get"
-     * - Seguido do nome do atributo
-     *
-     * Tipo:
-     * - Mesmo tipo do atributo (int)
-     *
-     * Função:
-     * - Retornar o valor do atributo
-     * - Permitir acesso controlado ao atributo privado
-     */
     public int getDia() {
         return dia;
     }
@@ -127,11 +65,6 @@ class Data {
         return mes;
     }
 
-
-    // =========================
-    // MÉTODOS DE SAÍDA
-    // =========================
-
     public String escreverAbreviado(){
 
         if (ano == 0)
@@ -154,15 +87,8 @@ class Data {
 
     public static void main (String args[]) {
 
-        // Criação de objeto com valor inválido (mês 14)
-        // A validação do setter corrige automaticamente
         Data hoje = new Data(15, 14, 2026);
 
-        System.out.println( hoje.escreverAbreviado() );
-        System.out.println( hoje.escreverExtenso() );
-
-
-        // Array de objetos
         Data aulasPOO[] = new Data[5];
 
         aulasPOO[0] = new Data(1, 4, 2026);
@@ -171,10 +97,10 @@ class Data {
         aulasPOO[3] = new Data(22, 4, 2026);
         aulasPOO[4] = new Data(29, 4, 2026);
 
+        System.out.println( hoje.escreverAbreviado() );
+        System.out.println( hoje.escreverExtenso() );
 
         System.out.printf("A avalição ficou marcada para %s \n", aulasPOO[3].escreverExtenso() );
-
-
         System.out.println("As aulas de POO em abril serão nas seguintes datas \n");
 
         for (int i = 0; i < aulasPOO.length; i++){
