@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 public class TesteThreads{
-
     static class MinhaThread extends Thread {
 
         private int operacao;
@@ -31,7 +30,6 @@ public class TesteThreads{
 
         @Override
         public void run() {
-
             switch (operacao) {
                 case 1:
                     double resultado = raiz(1000000000L);

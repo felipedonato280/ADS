@@ -21,7 +21,13 @@ SELECT (
 	WHERE cliente.id_cliente = compras.id_cliente) AS nome_cliente,
 nome_compra
 FROM compras
-WHERE id_cliente IS NOT NULL; 
+WHERE id_cliente IS NOT NULL;
+
+SELECT nome_cliente, nome_compra
+FROM compras
+INNER JOIN cliente
+ON compras.id_cliente = cliente.id_cliente;
+
 
 --4) Listar somente os nomes dos clientes que NÃO fizeram compras. 
 

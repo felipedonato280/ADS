@@ -3,7 +3,6 @@ import java.util.List;
 import java.util.Scanner;
 
 public class TesteProcessos {
-
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
 
