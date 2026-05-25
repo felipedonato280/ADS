@@ -15,11 +15,7 @@ public class TesteProcessos {
         System.out.println("Quantos processos deseja criar?");
         int quantidade = input.nextInt();
 
-        Runtime runtime = Runtime.getRuntime();
-
         long inicio = System.nanoTime();
-
-        long memoriaAntes = runtime.totalMemory() - runtime.freeMemory();
 
         List<Process> processos = new ArrayList<>();
 
@@ -39,14 +35,10 @@ public class TesteProcessos {
         }
 
         long fim = System.nanoTime();
-
-        long memoriaDepois = runtime.totalMemory() - runtime.freeMemory();
-
         double tempoSegundos = (fim - inicio) / 1_000_000_000.0;
 
         System.out.println("\nTodos os " + quantidade + " processos foram finalizados");
         System.out.println("Tempo: " + tempoSegundos + " segundos");
-        System.out.println("Memória usada: " + ((memoriaDepois - memoriaAntes) / 1024) + " KB");
 
         input.close();
     }

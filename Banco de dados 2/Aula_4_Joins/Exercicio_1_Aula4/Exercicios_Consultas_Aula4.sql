@@ -1,3 +1,6 @@
+-- Realizar as seguintes consultas SQL aplicando o produto cartesiano (cruzamento de 
+-- chave primária e chave estrangeira na cláusula WHERE).
+
 --1) Listar todos os clientes. 
 
 SELECT * FROM cliente;
@@ -7,6 +10,10 @@ SELECT * FROM cliente;
 SELECT * FROM compras;
 
 --3) Listar somente os clientes que fizeram compras e quais foram estas compras. 
+
+SELECT nome_cliente, nome_compra
+FROM cliente, compras
+WHERE cliente.id_cliente = compras.id_cliente;
 
 SELECT id_cliente, nome_compra
 FROM compras
@@ -22,12 +29,6 @@ SELECT (
 nome_compra
 FROM compras
 WHERE id_cliente IS NOT NULL;
-
-SELECT nome_cliente, nome_compra
-FROM compras
-INNER JOIN cliente
-ON compras.id_cliente = cliente.id_cliente;
-
 
 --4) Listar somente os nomes dos clientes que NÃO fizeram compras. 
 
@@ -50,13 +51,16 @@ ON compras.id_cliente = cliente.id_cliente;
 
 
 
---Realizar as seguintes consultas SQL aplicando o tipo de junção (join) apropriado. 
+-- Realizar as seguintes consultas SQL aplicando o tipo de junção (join) apropriado. 
 
 
 
 --9) Listar somente os clientes que fizeram compras e quais foram estas compras. 
 
-
+SELECT nome_cliente, nome_compra
+FROM compras
+INNER JOIN cliente
+ON compras.id_cliente = cliente.id_cliente;
 
 --10) Listar todos os clientes independente se fizeram ou não compras. 
 
