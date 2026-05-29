@@ -1,6 +1,3 @@
-// Import necessário para leitura de dados via teclado
-import java.util.Scanner;
-
 public class Aluno {
     private String nome;
     private String cpf;
@@ -71,43 +68,6 @@ public class Aluno {
 
     public int getCurso() {
         return curso;
-    }
-
-    public void lerTeclado(){
-        Scanner sc = new Scanner(System.in);
-
-        System.out.printf("Informe o nome do aluno: ");
-        nome = sc.nextLine();
-
-        System.out.printf("Informe o CPF do aluno: ");
-        cpf = sc.nextLine();
-
-        System.out.printf("Informe o e-mail do aluno: ");
-        email = sc.nextLine();
-
-        System.out.printf("Informe a matricula do aluno: ");
-        matricula = sc.nextInt();
-
-        sc.nextLine(); // consome a quebra de linha pendente
-
-        // ALTERAÇÃO: leitura do curso agora é feita como número inteiro
-        // O usuário deve informar um dos códigos definidos nas constantes
-        System.out.printf("Informe o curso do aluno: ");
-        curso = sc.nextInt();
-
-        sc.nextLine(); // consome a quebra de linha pendente
-
-        // System.out.printf("Informe a data de nascimento: ");
-        /*
-         * Não é possível ler a data de nascimento diretamente como String,
-         * pois o atributo passou a ser do tipo Data.
-         * Para isso, seria necessário ler dia, mês e ano separadamente
-         * e instanciar um objeto Data com essas informações.
-         */
-        // nascimento = sc.nextLine();
-
-        System.out.printf("Informe um telefone para contato: ");
-        fone = sc.nextLine();
     }
 
     public String toString(){
