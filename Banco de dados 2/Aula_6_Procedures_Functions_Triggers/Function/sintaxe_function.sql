@@ -1,23 +1,29 @@
---SINTAXE PARA CRIAR FUNÇÕES 
-CREATE OR REPLACE FUNCTION nomedafuncao() RETURNS tipo
-AS $$ 
-DECLARE
-	....
-	BEGIN
-	....
-		RETURN
-	END;
-$$ LANGUAGE 'plpgsql';
-
 --EXEMPLO: Criar a função alomundo 
 --OPÇÃO 1
 CREATE OR REPLACE FUNCTION alomundo() RETURNS varchar
 AS $$ 
-DECLARE mensagem VARCHAR := 'Alo, Mundo';
+DECLARE mensagem VARCHAR := 'HELLO, WORLD';
 BEGIN
 RETURN mensagem; 
 END;
 $$ LANGUAGE plpgsql;
+
+SELECT alomundo();
+
+--Teste
+
+CREATE OR REPLACE FUNCTION fatorial(numero INTEGER) RETURNS FLOAT
+AS $$
+BEGIN
+    IF numero <= 1 THEN
+        RETURN 1;
+    ELSE
+        RETURN numero * fatorial(numero - 1);
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+
+select fatorial(4);
 
 ----FUNÇÃO COM DELIMITADOR DE FUNÇÃO USANDO ASPAS SIMPLES AO INVÉS DE DOLAR OU CIFRÃO COM FUNÇÃO QUE RETORNA UM VARCHAR 
 

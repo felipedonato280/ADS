@@ -82,7 +82,7 @@ call transferencia (1,2,300);
 
 -- para dropar uma procedure
 
- drop procedure transferencia;  
+ drop procedure transferencia;
 
 --poderia deixar a procedure mais completa verificando se o saldo é maior do que o valor que está transferindo, teria que fazer uma validação nesse caso.  
 

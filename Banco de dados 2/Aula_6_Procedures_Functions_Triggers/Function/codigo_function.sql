@@ -25,7 +25,7 @@ END;
 $$ LANGUAGE 'plpgsql'; 
 
 --Testar 
-select * from aniversariantes(); 
+select * from aniversariantes();
 select nome from aniversariantes(); 
 
 --Exemplos Funções no PostgreSQL
