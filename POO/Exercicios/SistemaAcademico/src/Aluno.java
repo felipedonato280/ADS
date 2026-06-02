@@ -43,6 +43,18 @@ public class Aluno {
         return nome;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public int getMatricula(){
+        return matricula;
+    }
+
+    public int getCurso() {
+        return curso;
+    }
+
     public void setEmail(String email) {
         if (email.length() > 8) {
             this.email = email;
@@ -51,11 +63,6 @@ public class Aluno {
             this.email = "";
         }
     }
-
-    public String getEmail() {
-        return email;
-    }
-
 
     public void setCurso(int curso) {
         if (curso > 0){
@@ -66,10 +73,7 @@ public class Aluno {
         }
     }
 
-    public int getCurso() {
-        return curso;
-    }
-
+    @Override
     public String toString(){
         String saida = "";
 

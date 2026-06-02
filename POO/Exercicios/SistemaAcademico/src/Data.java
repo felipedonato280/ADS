@@ -13,6 +13,18 @@ class Data {
         setAno(ano);
     }
 
+    public int getDia() {
+        return dia;
+    }
+
+    public int getMes() {
+        return mes;
+    }
+
+    public int getAno(){
+        return ano;
+    }
+
     public void setDia(int dia) {
 
         // Array com quantidade de dias por mês
@@ -27,11 +39,6 @@ class Data {
         }
     }
 
-    public int getDia() {
-        return dia;
-    }
-
-
     public void setAno(int ano) {
 
         // Validação simples: ano não pode ser negativo
@@ -42,12 +49,6 @@ class Data {
             this.ano = 1900;
         }
     }
-
-
-    public int getAno(){
-        return ano;
-    }
-
 
     public void setMes(int mes) {
 
@@ -60,11 +61,6 @@ class Data {
         }
     }
 
-
-    public int getMes() {
-        return mes;
-    }
-
     public String escreverAbreviado(){
 
         if (ano == 0)
@@ -72,7 +68,6 @@ class Data {
 
         return dia + "/" + mes + "/" + ano;
     }
-
 
     public String escreverExtenso() {
 
@@ -83,7 +78,6 @@ class Data {
 
         return dia + " de " + meses[mes] + " de " + ano;
     }
-
 
     public static void main (String args[]) {
 

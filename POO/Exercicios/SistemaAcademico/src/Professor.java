@@ -29,7 +29,19 @@ public class Professor {
 
         setEmail(email);
 
-        setMatricula();
+        gerarMatricula();
+    }
+
+    public String getNome(){
+        return nome;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public int getMatricula(){
+        return matricula;
     }
 
     public void setEmail(String email){
@@ -42,11 +54,7 @@ public class Professor {
         }
     }
 
-    public String getEmail(){
-        return email;
-    }
-
-    public  void setMatricula(){
+    private void gerarMatricula(){
         Random random = new Random();
         int numero;
 
@@ -60,23 +68,25 @@ public class Professor {
         this.matricula = numero;
     }
 
-    public int getMatricula(){
-        return matricula;
-    }
-
     @Override
     public String toString(){
-        return "Professor: " + nome + "\n" +
+        return "PROFESSOR: " + nome + "\n" +
                 "CPF: " + cpf + "\n" +
                 "EMAIL: " + email + "\n" +
                 "MATRICULA: " + matricula + "\n";
     }
 
     public static void main(String[] args){
-        Professor p1 = new Professor("Felipe", "123", "teste@gmail.com");
-        Professor p2 = new Professor("Joao", "456", "joao@gmail.com");
+        Professor p1 = new Professor("Marchesan", "123", "marchesan@gmail.com");
+        Professor p2 = new Professor("Fabio", "456", "fabio@gmail.com");
+        Professor p3 = new Professor("Marco", "000", "marco@gmail.com");
+        Professor p4 = new Professor("Victor", "333", "victor@gmail.com");
 
         System.out.println(p1.toString());
         System.out.println(p2.toString());
+        System.out.println(p3.toString());
+        System.out.println(p4.toString());
+
+        System.out.println(matriculasUsadas);
     }
 }
