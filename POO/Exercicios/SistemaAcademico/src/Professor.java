@@ -6,9 +6,9 @@ public class Professor {
     private String nome;
     private String cpf;
     private String email;
-    private int matricula;
+    private final int matricula;
 
-    private static Set<Integer> matriculasUsadas = new HashSet<>();
+    private static final Set<Integer> matriculasUsadas = new HashSet<>();
 
     public Professor(String nome, String cpf, String email){
         if(nome != null && !nome.isEmpty()){
@@ -29,7 +29,7 @@ public class Professor {
 
         setEmail(email);
 
-        gerarMatricula();
+        this.matricula = gerarMatricula();
     }
 
     public String getNome(){
@@ -54,7 +54,7 @@ public class Professor {
         }
     }
 
-    private void gerarMatricula(){
+    private int gerarMatricula(){
         Random random = new Random();
         int numero;
 
@@ -65,7 +65,7 @@ public class Professor {
 
         matriculasUsadas.add(numero);
 
-        this.matricula = numero;
+        return numero;
     }
 
     @Override
