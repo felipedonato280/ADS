@@ -23,7 +23,7 @@ public class Disciplina {
     }
 
     public void setCargaHoraria(int cargaHoraria){
-        if(cargaHoraria > 0 && cargaHoraria < 120){
+        if(cargaHoraria > 0 && cargaHoraria <= 120){
             this.cargaHoraria = cargaHoraria;
         }
         else{
@@ -40,8 +40,8 @@ public class Disciplina {
     }
 
     public static void main(String[] args){
-        Professor p1 = new Professor("Marchesan", "123", "marchesan@gmail.com");
-        Professor p2 = new Professor("Fabio", "456", "fabio@gmail.com");
+        Professor p1 = new Professor("Marchesan silva", "919.960.290-37", "marchesan@gmail.com");
+        Professor p2 = new Professor("Fabio silva", "919.960.290-37", "fabio@gmail.com");
 
         Disciplina d1 = new Disciplina("matematica", p1, 120);
 

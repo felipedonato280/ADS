@@ -7,6 +7,8 @@ public class Turma {
     private final ArrayList<Data> encontros;
     private int qtdMatriculados;
 
+    private static final int TAMANHO_TURMA = 35;
+
     public Turma(Disciplina disc){
         this.disc = disc;
         this.alunos = new ArrayList<>();
@@ -20,40 +22,40 @@ public class Turma {
     }
 
     public void adicionarAluno(Aluno aluno){
-        if(qtdMatriculados < 35){
+        if(qtdMatriculados < TAMANHO_TURMA){
             alunos.add(aluno);
             qtdMatriculados ++;
+            System.out.println("Aluno " + aluno.getNome() + " Adicionado a turma");
         }
         else{
-            System.out.println("Limite da turma atingido");
+            System.out.println("Limite de " + TAMANHO_TURMA + " da turma atingido");
         }
     }
 
     public String mostrarAlunos(){
-        String string = "";
+        StringBuilder sb = new StringBuilder();
 
         for(Aluno aluno : alunos){
-            string += aluno.getNome() + "\n";
+            sb.append(aluno.getNome()).append("\n");
         }
 
-        return string;
-
+        return sb.toString();
     }
 
     public String mostrarEncontros(){
-        String string = "";
+      StringBuilder sb = new StringBuilder();
 
         for(Data encontro : encontros){
-            string += encontro.escreverAbreviado() + "\n";
+            sb.append(encontro.escreverAbreviado()).append("\n");
         }
 
-        return string;
+        return sb.toString();
     }
 
     public String mostrarRelatorio(){
-        return  "DISCIPLINA:\n" + disc + "\n" +
-                "ALUNOS:\n" + mostrarAlunos() + "\n" +
-                "ENCONTROS:\n" + mostrarEncontros();
+        return  "\nDISCIPLINA:\n" + disc +
+                "\nALUNOS:\n" + mostrarAlunos() +
+                "\nENCONTROS:\n" + mostrarEncontros();
     }
 
     @Override
@@ -70,7 +72,7 @@ public class Turma {
         Aluno al02 = new Aluno("Felipe Donato", "556.161.350-20", "felipe@gmail.com", Aluno.CURSO_ADS, new Data(14, 8, 2009));
         Aluno al03 = new Aluno("Gustavo Guanabara", "315.339.860-70", "gustavo@ymail.com", Aluno.CURSO_ADS, new Data (21, 12, 2006));
 
-        Professor p1 = new Professor("Marchesan", "919.960.290-37", "marchesan@gmail.com");
+        Professor p1 = new Professor("Marchesan silva", "919.960.290-37", "marchesan@gmail.com");
 
         Disciplina d1 = new Disciplina("Banco de dados 2", p1, 80);
 
