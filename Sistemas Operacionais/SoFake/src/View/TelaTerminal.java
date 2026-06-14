@@ -120,6 +120,16 @@ public class TelaTerminal {
                 while (systemOn) {
                     String action = inputQueue.take();
                     String result = Conexao.terminal(action.toLowerCase());
+
+                    if (Conexao.pc.getUsoCPU() >= 100) {
+                        SwingUtilities.invokeLater(() -> {
+                            new TelaAzul();
+                            TelaFundo.dispose();
+                        });
+                        systemOn = false;
+                        break;
+                    }
+
                     if (result.equals("break")) {
                         systemOn = false;
                         System.out.println("System Off");

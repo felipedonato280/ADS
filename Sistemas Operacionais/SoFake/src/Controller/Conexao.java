@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.Conteudo;
-import Model.Manual;
-import Model.Pastas;
-import Model.Usuarios;
+import Model.*;
 
 import java.util.ArrayList;
 import java.util.function.Supplier;
@@ -15,7 +12,9 @@ public class Conexao {
 
     public static Supplier<String> provedorEntrada = null;
     public static Runnable limparTelaCallback = null;
-    public static String usuarioAtual = "";   // armazena o nome do usuário logado
+    private static String usuarioAtual = "";   // armazena o nome do usuário logado
+
+    public static Maquina pc = new Maquina("Ryzen 5 5600", 32000, 1000000);
 
     private static void criarManual() {
         Manual manual = new Manual();
@@ -88,18 +87,18 @@ public class Conexao {
 
     public static String logar() throws InterruptedException {
         System.out.println("Login");
-        String nome = "";
         boolean logado = false;
+        String nomeUsuario = "";
+
         while(!logado){
             Thread.sleep(500);
-            String nomeUsuario = lerLinha("\nDigite seu nome: \n");
+            nomeUsuario = lerLinha("\nDigite seu nome: \n");
             Thread.sleep(500);
             String senhaUsuario = lerSenha("\nDigite sua senha: \n");
             Thread.sleep(500);
 
             for (Usuarios u : usuarios) {
-                if (u.getUsuario().equals(nomeUsuario) && u.getSenha().equals(senhaUsuario)) {
-                    nome = nomeUsuario;
+                if (u.getUsuario().equals(nomeUsuario) && u.autentica(senhaUsuario)) {
                     logado = true;
                     break;
                 }
@@ -110,9 +109,9 @@ public class Conexao {
                 System.out.println("\nNome ou senha incorretos\n");
             }
         }
-        usuarioAtual = nome;
+        usuarioAtual = nomeUsuario;
         Thread.sleep(500);
-        return nome;
+        return nomeUsuario;
     }
 
     private static void resetarSistema() {
@@ -149,6 +148,27 @@ public class Conexao {
                 }
                 break;
 
+            case "memory":
+                System.out.println("Memoria total: " + pc.getMemoriaMaquina() + " MB");
+                System.out.println("Uso de Memoria: " + pc.getUsoMemoria() + " MB");
+                break;
+
+            case "cpu":
+                System.out.println("Processador: " + pc.getProcessador());
+                System.out.println("Uso de CPU: " + pc.getUsoCPU() + "%");
+                break;
+
+            case "ram":
+                System.out.println("RAM total: " + pc.getRamMaquina() + " MB");
+                System.out.println("Uso de RAM: " + pc.getUsoRam() + " MB");
+                break;
+
+            case "df -h":
+                System.out.println("Processador: " + pc.getProcessador());
+                System.out.println("RAM total: " + pc.getRamMaquina() + " MB");
+                System.out.println("Memoria total: " + pc.getMemoriaMaquina() + " MB");
+                break;
+
             case "mkdir":
                 String nomePastaMkdir = lerLinha("Nome da pasta: ");
                 boolean existe = false;
@@ -161,25 +181,110 @@ public class Conexao {
                 }
 
                 if (existe) {
-                    System.out.println("Ja existe uma pasta com esse nome!");
+                    System.out.println("Já existe uma pasta com esse nome!");
                 } else {
                     Pastas nova = new Pastas(nomePastaMkdir, 10);
-                    espaco.add(nova);
-                    System.out.println("Pasta criada: " + nomePastaMkdir);
+
+                    // verifica se há memória suficiente
+                    if (pc.getUsoRam() + nova.getPeso() > pc.getRamMaquina() || pc.getUsoMemoria() + nova.getPeso() > pc.getMemoriaMaquina()) {
+                        System.out.println("Não há recursos suficientes para criar a pasta!");
+                    } else {
+                        espaco.add(nova);
+                        pc.consumirCPU(1);
+                        pc.consumirRam(nova.getPeso());
+                        pc.consumirMemoria(nova.getPeso());
+                        System.out.println("Pasta criada: " + nomePastaMkdir);
+                    }
                 }
                 break;
+
 
             case "write":
                 String pastaEscolhida = lerLinha("Qual pasta?\n");
                 for (Pastas p : espaco) {
                     if (p.getNome().equals(pastaEscolhida)) {
-                        String texto = lerLinha("Digite o conteudo: \n");
-                        p.setConteudo(new Conteudo("Entrada", texto));
-                        System.out.println("Escrito em " + pastaEscolhida);
+                        String texto = lerLinha("Digite o conteúdo: \n");
+                        int pesoArquivo = texto.length();
+
+                        if (pc.getUsoRam() + pesoArquivo > pc.getRamMaquina() || pc.getUsoMemoria() + pesoArquivo > pc.getMemoriaMaquina()) {
+                            System.out.println("Não há recursos suficientes para escrever o arquivo!");
+                        } else {
+                            Conteudo conteudoNovo = new Conteudo("Entrada", texto);
+                            p.setConteudo(conteudoNovo);
+                            pc.consumirCPU(1);
+                            pc.consumirRam(pesoArquivo);
+                            pc.consumirMemoria(pesoArquivo);
+                            System.out.println("Escrito em " + pastaEscolhida);
+                        }
                         break;
                     }
                 }
                 break;
+
+
+            case "rm -w":
+                String pastaAlvo = lerLinha("Qual pasta deseja limpar?\n");
+                boolean encontrada = false;
+
+                for (Pastas p : espaco) {
+                    if (p.getNome().equals(pastaAlvo)) {
+                        encontrada = true;
+                        if (p.estaVazia()) {
+                            System.out.println("A pasta já está vazia.");
+                        } else {
+                            int pesoRemovido = 0;
+                            for (Conteudo c : p.getConteudos()) {
+                                pesoRemovido += c.getTexto().length();
+                            }
+
+                            p.limparConteudos();
+                            System.out.println("Entradas removidas da pasta: " + pastaAlvo);
+
+                            pc.consumirCPU(1);
+                            pc.liberarRam(pesoRemovido);
+                            pc.liberarMemoria(pesoRemovido);
+                        }
+                        break;
+                    }
+                }
+
+                if (!encontrada) {
+                    System.out.println("Pasta não encontrada.");
+                }
+                break;
+
+
+            case "rm -r":
+                String pastaRemover = lerLinha("Qual pasta deseja excluir?\n");
+                boolean pastaEncontrada = false;
+
+                for (Pastas p : espaco) {
+                    if (p.getNome().equals(pastaRemover)) {
+                        pastaEncontrada = true;
+
+                        // calcula peso da pasta + conteúdos
+                        int pesoRemovido = p.getPeso();
+                        for (Conteudo c : p.getConteudos()) {
+                            pesoRemovido += c.getTexto().length();
+                        }
+
+                        espaco.remove(p);
+                        System.out.println("Pasta removida: " + pastaRemover);
+
+                        // atualiza consumo da máquina
+                        pc.consumirCPU(2); // remover pasta consome CPU
+                        pc.liberarRam(pesoRemovido);
+                        pc.liberarMemoria(pesoRemovido);
+
+                        break;
+                    }
+                }
+
+                if (!pastaEncontrada) {
+                    System.out.println("Pasta não encontrada.");
+                }
+                break;
+
 
             case "lf":
                 String nomePastaLf = lerLinha("Nome da pasta para visualizar?\n");
@@ -188,12 +293,6 @@ public class Conexao {
                         p.mostrarConteudo();
                     }
                 }
-                break;
-
-            case "rm -r":
-                String pastaRemover = lerLinha("Qual pasta deseja excluir?\n");
-                espaco.removeIf(p -> p.getNome().equals(pastaRemover));
-                System.out.println("Pasta removida: " + pastaRemover);
                 break;
 
             case "logoff":

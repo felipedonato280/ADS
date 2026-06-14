@@ -31,11 +31,23 @@ public class Pastas {
         }
     }
 
+    public void limparConteudos() {
+        conteudos.clear();
+    }
+
     public String getNome(){
         return nome;
     }
 
     public int getPeso(){
         return peso;
+    }
+
+    public ArrayList<Conteudo> getConteudos() {
+        return new ArrayList<>(conteudos); // retorna cópia para não expor direto
+    }
+
+    public boolean estaVazia() {
+        return conteudos.isEmpty();
     }
 }

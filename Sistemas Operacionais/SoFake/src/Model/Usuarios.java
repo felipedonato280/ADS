@@ -4,25 +4,20 @@ public class Usuarios {
     private String usuario;
     private String senha;
 
-    // Getters and Setters
+    public Usuarios(String usuario, String senha) {
+        setUsuario(usuario);
+        this.senha = senha;
+    }
+
+    public boolean autentica(String senhaDigitada) {
+        return this.senha.equals(senhaDigitada);
+    }
+
     public String getUsuario() {
         return usuario;
     }
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    private void setSenha(String senha) {
-        this.senha = senha;
-    }
-
-    public Usuarios(String usuario, String senha) {
-        setUsuario(usuario);
-        setSenha(senha);
     }
 }
