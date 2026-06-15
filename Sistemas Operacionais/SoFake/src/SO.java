@@ -1,20 +1,21 @@
-import Controller.Conexao;
+import Controller.LoginController;
+import Controller.SistemaOperacionalController;
 import Model.*;
 import View.TelaTerminal;
 
 public class SO {
     public static void main(String[] args) throws InterruptedException {
-        Usuarios user1 = new Usuarios("Eduardo", "1234");
-        Usuarios user2 = new Usuarios("Felipe", "5678");
-        Usuarios user3 = new Usuarios("Kátia", "9012");
-        Usuarios user4 = new Usuarios("Lui", "3456");
-        Usuarios user5 = new Usuarios("Stefania", "7890");
+        Usuario user1 = new Usuario("Eduardo", "1234");
+        Usuario user2 = new Usuario("Felipe", "5678");
+        Usuario user3 = new Usuario("Kátia", "9012");
+        Usuario user4 = new Usuario("Lui", "3456");
+        Usuario user5 = new Usuario("Stefania", "7890");
 
-        Conexao.usuarios.add(user1);
-        Conexao.usuarios.add(user2);
-        Conexao.usuarios.add(user3);
-        Conexao.usuarios.add(user4);
-        Conexao.usuarios.add(user5);
+        LoginController.usuarios.add(user1);
+        LoginController.usuarios.add(user2);
+        LoginController.usuarios.add(user3);
+        LoginController.usuarios.add(user4);
+        LoginController.usuarios.add(user5);
 
         new TelaTerminal(); // apenas abre a interface
     }

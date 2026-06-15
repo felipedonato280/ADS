@@ -1,6 +1,6 @@
 package Model;
 
-public class Manual extends Pastas{
+public class Manual extends Pasta {
     public Manual(){
         super("Manual.pdf", 10);
 

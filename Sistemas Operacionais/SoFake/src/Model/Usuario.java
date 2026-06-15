@@ -1,10 +1,10 @@
 package Model;
 
-public class Usuarios {
+public class Usuario {
     private String usuario;
     private String senha;
 
-    public Usuarios(String usuario, String senha) {
+    public Usuario(String usuario, String senha) {
         setUsuario(usuario);
         this.senha = senha;
     }

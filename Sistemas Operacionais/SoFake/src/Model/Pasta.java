@@ -2,12 +2,12 @@ package Model;
 
 import java.util.ArrayList;
 
-public class Pastas {
+public class Pasta {
     protected String nome;
     protected int peso;
     protected ArrayList <Conteudo> conteudos = new ArrayList<>();
 
-    public Pastas(String nome, int peso){
+    public Pasta(String nome, int peso){
         setNome(nome);
         setPeso(peso);
     }

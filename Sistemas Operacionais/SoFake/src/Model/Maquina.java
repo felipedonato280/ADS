@@ -19,7 +19,7 @@ public class Maquina {
         this.usoMemoria = 2.000f;  // em MB
     }
 
-    public void atualizarUso(Pastas pasta) {
+    public void atualizarUso(Pasta pasta) {
         usoCPU += 1;
         usoRam += pasta.getPeso();
         usoMemoria += pasta.getPeso();
