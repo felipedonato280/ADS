@@ -1,3 +1,14 @@
+-- Verifica se o banco já existe
+IF DB_ID('Campeonato_Futebol') IS NULL
+BEGIN
+    CREATE DATABASE Campeonato_Futebol;
+END;
+GO
+
+-- Seleciona o banco para uso
+USE Campeonato_Futebol;
+GO
+
 CREATE TABLE cidade (
     codcidade INT,
     nome VARCHAR(40) NOT NULL,
@@ -159,60 +170,137 @@ GO
 -- ==================================
 -- PROCEDURE
 -- ==================================
--- Esta procedure recebe o nome de um clube como parâmetro
--- e retorna os jogadores pertencentes a esse clube.
 
-CREATE OR ALTER PROCEDURE sp_ListarJogadoresClube
-    @NomeClube VARCHAR(50) -- Nome do clube informado pelo usuário
-AS
-BEGIN
+-- Esta procedure é responsável por realizar a contratação
+-- de um novo jogador para um clube.
+--
+-- Antes de efetuar o cadastro, são realizadas validações:
+-- 1) Verifica se o clube informado existe na base de dados.
+-- 2) Verifica se já existe um jogador cadastrado com o mesmo nome.
+--
+-- Caso todas as validações sejam aprovadas, o jogador é inserido
+-- na tabela jogador.
 
-    SELECT
-        jogador.nome AS Jogador,
-        jogador.posicao,
-        jogador.idade,
-        jogador.salario
-    FROM jogador
-    INNER JOIN clube
-        ON jogador.codclube = clube.codclube -- Relaciona jogador ao seu clube
-    WHERE clube.nome = @NomeClube; -- Filtra apenas o clube informado
-
-END;
-GO
-
-
--- ==================================
--- FUNÇÃO MÉDIA SALARIAL
--- ==================================
--- Esta função calcula a média salarial dos jogadores
--- de um determinado clube.
-
-CREATE OR ALTER FUNCTION fn_MediaSalarialClube
+CREATE OR ALTER PROCEDURE sp_ContratarJogador
 (
-    @CodClube INT -- Código do clube
+    @CodJogador INT,      -- ID do jogador
+    @Nome VARCHAR(30),    -- Nome do jogador
+    @Posicao VARCHAR(20), -- Posição em campo
+    @Idade INT,           -- Idade do jogador
+    @Salario FLOAT,       -- Salário do jogador
+    @CodClube INT         -- Clube ao qual o jogador pertence
 )
-RETURNS DECIMAL(10,2)
 AS
 BEGIN
 
-    DECLARE @Media DECIMAL(10,2); -- Armazena a média calculada
+    -- Verifica se o clube informado existe na tabela clube.
+    -- Caso não exista, a execução da procedure é interrompida.
+    IF NOT EXISTS
+    (
+        SELECT 1
+        FROM clube
+        WHERE codclube = @CodClube
+    )
+    BEGIN
+        PRINT 'Clube não encontrado.';
+        RETURN;
+    END;
 
-    SELECT
-        @Media = AVG(CAST(salario AS DECIMAL(10,2))) -- Calcula a média salarial
-    FROM jogador
-    WHERE codclube = @CodClube; -- Apenas jogadores do clube informado
+    -- Verifica se já existe um jogador cadastrado
+    -- com o mesmo nome.
+    IF EXISTS
+    (
+        SELECT 1
+        FROM jogador
+        WHERE nome = @Nome
+    )
+    BEGIN
+        PRINT 'Jogador já cadastrado.';
+        RETURN;
+    END;
 
-    RETURN ISNULL(@Media,0); -- Retorna 0 caso não existam jogadores
+    -- Realiza a inserção do novo jogador na tabela.
+    INSERT INTO jogador
+    (
+        codjogador,
+        nome,
+        posicao,
+        idade,
+        salario,
+        codclube
+    )
+    VALUES
+    (
+        @CodJogador,
+        @Nome,
+        @Posicao,
+        @Idade,
+        @Salario,
+        @CodClube
+    );
+
+    -- Mensagem exibida ao usuário indicando sucesso.
+    PRINT 'Jogador contratado com sucesso.';
 
 END;
 GO
 
 
 -- ==================================
--- FUNÇÃO FOLHA SALARIAL
+-- FUNCTION
 -- ==================================
--- Esta função calcula o total gasto com salários
--- de todos os jogadores de um clube.
+
+-- Esta função recebe um valor salarial como parâmetro
+-- e retorna uma classificação textual.
+--
+-- O objetivo é categorizar os jogadores de acordo
+-- com a faixa salarial recebida.
+
+CREATE OR ALTER FUNCTION fn_ClassificacaoSalarial
+(
+    @Salario MONEY -- Salário que será analisado
+)
+RETURNS VARCHAR(20)
+AS
+BEGIN
+
+    -- Variável responsável por armazenar o resultado.
+    DECLARE @Classificacao VARCHAR(20);
+
+    -- Salários abaixo de R$ 200.000 são classificados
+    -- como Baixo Salário.
+    IF @Salario < 200000
+        SET @Classificacao = 'Baixo Salario';
+
+    -- Salários entre R$ 200.000 e R$ 499.999
+    -- são classificados como Médio Salário.
+    ELSE IF @Salario < 500000
+        SET @Classificacao = 'Medio Salario';
+
+    -- Salários iguais ou superiores a R$ 500.000
+    -- são classificados como Alto Salário.
+    ELSE
+        SET @Classificacao = 'Alto Salario';
+
+    -- Retorna a classificação calculada.
+    RETURN @Classificacao;
+
+END;
+GO
+
+
+-- ==================================
+-- FUNÇÃO FOLHA SALARIAL PARA ASSOCIAR A TRIGGER
+-- ==================================
+
+-- Esta função calcula a folha salarial de um clube.
+--
+-- Folha salarial é o valor total gasto com salários
+-- de todos os jogadores pertencentes ao clube informado.
+--
+-- Esta função é utilizada pela trigger para registrar
+-- na auditoria o valor atualizado da folha salarial
+-- após uma alteração de salário.
 
 CREATE OR ALTER FUNCTION fn_FolhaSalarialClube
 (
@@ -222,14 +310,17 @@ RETURNS MONEY
 AS
 BEGIN
 
-    DECLARE @Total MONEY; -- Armazena o valor total
+    -- Variável responsável por armazenar a soma.
+    DECLARE @Total MONEY;
 
+    -- Soma todos os salários dos jogadores do clube.
     SELECT
-        @Total = SUM(salario) -- Soma todos os salários do clube
+        @Total = SUM(salario)
     FROM jogador
     WHERE codclube = @CodClube;
 
-    RETURN ISNULL(@Total,0); -- Retorna 0 caso não existam jogadores
+    -- Caso não existam jogadores, retorna 0.
+    RETURN ISNULL(@Total,0);
 
 END;
 GO
@@ -238,19 +329,23 @@ GO
 -- ==================================
 -- TABELA DE AUDITORIA
 -- ==================================
--- Esta tabela armazena o histórico de alterações
--- realizadas nos salários dos jogadores.
+
+-- Esta tabela tem a função de armazenar um histórico
+-- de alterações salariais realizadas nos jogadores.
+--
+-- Sempre que um salário for modificado, a trigger
+-- registrará as informações nesta tabela.
 
 IF OBJECT_ID('AuditoriaSalario','U') IS NULL
 BEGIN
 
     CREATE TABLE AuditoriaSalario
     (
-        idAuditoria INT IDENTITY(1,1) PRIMARY KEY, -- Identificador único
-        codJogador INT,                            -- Código do jogador
-        nomeJogador VARCHAR(100),                  -- Nome do jogador
-        salarioAntigo MONEY,                       -- Salário antes da alteração
-        salarioNovo MONEY,                         -- Salário após a alteração
+        idAuditoria INT IDENTITY(1,1) PRIMARY KEY, -- Identificador único da auditoria
+        codJogador INT,                            -- Código do jogador alterado
+        nomeJogador VARCHAR(100),                  -- Nome do jogador alterado
+        salarioAntigo MONEY,                       -- Salário antes da atualização
+        salarioNovo MONEY,                         -- Salário após a atualização
         folhaClube MONEY,                          -- Folha salarial atualizada do clube
         dataAlteracao DATETIME DEFAULT GETDATE()   -- Data e hora da alteração
     );
@@ -258,24 +353,35 @@ BEGIN
 END;
 GO
 
+SELECT * FROM AuditoriaSalario;
+GO
+
 
 -- ==================================
 -- TRIGGER
 -- ==================================
+
 -- Esta trigger é executada automaticamente após
--- uma atualização na tabela jogador.
--- Sua função é registrar alterações salariais
+-- uma operação UPDATE na tabela jogador.
+--
+-- Seu objetivo é registrar alterações salariais
 -- na tabela AuditoriaSalario.
+--
+-- Além disso, a trigger utiliza a função
+-- fn_FolhaSalarialClube para recalcular a folha
+-- salarial do clube após a alteração.
 
 CREATE OR ALTER TRIGGER trg_AtualizaFolhaSalarial
 ON jogador
-AFTER UPDATE -- Executa após um UPDATE
+AFTER UPDATE -- Executa após a atualização dos dados
 AS
 BEGIN
 
-    IF UPDATE(salario) -- Verifica se a coluna salario foi alterada
+    -- Verifica se a coluna salario participou do UPDATE.
+    IF UPDATE(salario)
     BEGIN
 
+        -- Insere um registro na tabela de auditoria.
         INSERT INTO AuditoriaSalario
         (
             codJogador,
@@ -285,14 +391,19 @@ BEGIN
             folhaClube
         )
         SELECT
-            i.codjogador,                         -- Código do jogador
-            i.nome,                               -- Nome do jogador
-            d.salario,                            -- Salário antes da alteração
-            i.salario,                            -- Salário após a alteração
-            dbo.fn_FolhaSalarialClube(i.codclube) -- Recalcula a folha salarial do clube
-        FROM inserted i                           -- Dados novos
+
+            i.codjogador, -- Código do jogador atualizado
+            i.nome,       -- Nome do jogador atualizado
+            d.salario,    -- Valor antigo obtido da tabela virtual deleted
+            i.salario,    -- Valor novo obtido da tabela virtual inserted
+            dbo.fn_FolhaSalarialClube(i.codclube)
+            -- Recalcula a folha salarial do clube após a alteração
+
+        FROM inserted i
+        -- inserted contém os registros após o UPDATE
+        -- deleted contém os registros antes do UPDATE
         INNER JOIN deleted d
-            ON i.codjogador = d.codjogador;       -- Relaciona dados antigos e novos
+            ON i.codjogador = d.codjogador;
 
     END;
 
@@ -304,35 +415,68 @@ GO
 -- TESTES
 -- ==================================
 
--- Lista todos os jogadores do Grêmio
-EXEC sp_ListarJogadoresClube 'grêmio';
+-- ==================================
+-- TESTE PROCEDURE
+-- ==================================
+
+EXEC sp_ContratarJogador
+    18,
+    'Cristiano Ronaldo',
+    'Atacante',
+    39,
+    2000000,
+    1;
 GO
 
--- Exibe a média salarial do clube de código 1
-SELECT dbo.fn_MediaSalarialClube(1) AS MediaSalarial;
+-- Verifica se o jogador foi inserido
+SELECT *
+FROM jogador
+WHERE codjogador = 18;
 GO
 
--- Exibe a folha salarial total do clube de código 1
-SELECT dbo.fn_FolhaSalarialClube(1) AS FolhaSalarial;
+-- ==================================
+-- TESTE FUNCTION
+-- ==================================
+
+SELECT
+    nome,
+    salario,
+    dbo.fn_ClassificacaoSalarial(salario) AS Classificacao
+FROM jogador;
 GO
+
+
+-- ==================================
+-- TESTES DA FUNCTION + TRIGGER
+-- ==================================
+
+-- Atualiza o salário do Luan
+UPDATE jogador
+SET salario = 600000
+WHERE nome = 'luan';
+GO
+
+-- Exibe o histórico de auditoria
+SELECT *
+FROM AuditoriaSalario;
+GO
+
+-- ==================================
+-- TESTE DA FOLHA SALARIAL
+-- ==================================
+
+SELECT dbo.fn_FolhaSalarialClube(1) AS FolhaSalarialGremio;
+GO
+
+-- ==================================
+-- ALTERAR ESTADO DA TRIGGER
+-- ==================================
 
 -- Desativa a trigger temporariamente
 DISABLE TRIGGER trg_AtualizaFolhaSalarial
 ON jogador;
 
--- Atualiza o salário do jogador Luan
-UPDATE jogador
-SET salario = 500000
-WHERE nome = 'luan';
-GO
 
 -- Reativa a trigger
 ENABLE TRIGGER trg_AtualizaFolhaSalarial
 ON jogador;
-
--- Exibe os jogadores atualizados
-SELECT * FROM jogador;
-
--- Exibe o histórico de auditoria
-SELECT * FROM AuditoriaSalario;
-GO
