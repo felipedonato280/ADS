@@ -79,7 +79,7 @@ class Data {
         return dia + " de " + meses[mes] + " de " + ano;
     }
 
-    public static void main (String args[]) {
+    /*public static void main (String args[]) {
 
         Data hoje = new Data(15, 14, 2026);
 
@@ -100,5 +100,5 @@ class Data {
         for (int i = 0; i < aulasPOO.length; i++){
             System.out.printf("%s \n", aulasPOO[i].escreverAbreviado() );
         }
-    }
+    }*/
 }

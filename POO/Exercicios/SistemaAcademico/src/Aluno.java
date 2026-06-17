@@ -64,7 +64,7 @@ public class Aluno extends Pessoa {
         return "Atualmente existem " + qtdAlunos + " matriculas na instituição";
     }
 
-    public static void main (String args[]) {
+    /*public static void main (String args[]) {
 
         Data nascimentoAluno01 = new Data(8, 4, 2005);
         nascimentoAluno01.setAno(2002);
@@ -79,5 +79,5 @@ public class Aluno extends Pessoa {
         System.out.println(al03);
 
         System.out.println(Aluno.exibirQtdAlunos());
-    }
+    }*/
 }

@@ -39,7 +39,7 @@ public class Disciplina {
                 "CH: " + cargaHoraria + "\n";
     }
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         Professor p1 = new Professor("Marchesan silva", "919.960.290-37", "marchesan@gmail.com");
         Professor p2 = new Professor("Fabio silva", "919.960.290-37", "fabio@gmail.com");
 
@@ -48,5 +48,5 @@ public class Disciplina {
         d1.setProf(p2);
 
         System.out.println(d1.toString());
-    }
+    }*/
 }
