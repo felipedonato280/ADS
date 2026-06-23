@@ -1,0 +1,18 @@
+[
+    {
+        "nome_usuario": "Felipe",
+        "senha_hash": "$2b$12$3WFgTV0VvUOToSp2hEydyew0Y6CpA.fb1sSltpbZaMu/prsMpf5sm"
+    },
+    {
+        "nome_usuario": "Stefania",
+        "senha_hash": "$2b$12$tT.CXM/G2.AIVHI4HW/Cp.2w.sqk.XhVlJGJ5fz4Icl8f58nuCVya"
+    },
+    {
+        "nome_usuario": "Katia",
+        "senha_hash": "$2b$12$8WcZMivavp3BdY5OD80GZuQ7z7x1jPDcE4.nR1tYpDiiw4qMzreJS"
+    },
+    {
+        "nome_usuario": "Teste",
+        "senha_hash": "$2b$12$eJicG8NjX9LYqK6WkcXmUeCOlJskX4Be6ekvQuhKtAcvL8teK52hm"
+    }
+]
