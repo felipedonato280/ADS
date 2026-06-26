@@ -1,8 +1,7 @@
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-abstract class Conta{
-	
+public abstract class Conta{
 	protected Pessoa cliente;
 	protected int nConta;
 	protected Data aberturaConta;
@@ -30,6 +29,35 @@ abstract class Conta{
 		aberturaConta = new Data(dia, mes, ano);
 	}
 
+	// METODOS PRINCIPAIS
+
+	// o que aconteceria se o programador quiser reescrever esse metodo?
+	public final void depositar(float valor){
+		if (valor > 0){
+			saldo += valor;
+		}
+	}
+
+	// um metodo abstract tem a finalidade de obrigar que ele sejam implementado na classe filha.
+	// ele não tem as chaves pois não tem nenhuma implementação
+	//public abstract void sacar(float valor);
+	public void imprimirExtrato(){
+		System.out.println("Cliente: " + cliente.getNome() );
+		System.out.println("Número da conta: " + nConta);
+
+		// necessário saber se a variavel cliente contem uma instancia da classe PessoaFisica, para poder chamar o metodo getCpf
+		// essa decisão é tomada em tempo de execução
+		if (cliente instanceof PessoaFisica) {
+			System.out.println("CPF: " + ( (PessoaFisica)(cliente)).getCpf() );	// necessário fazer a conversão do tipo em tempo de execução para poder chamar o metodo da classe correspondente. No caso, o metodo geCpf() pertence a PessoaFisica
+		} else {
+			System.out.println("CNPJ: " + ( (PessoaJuridica)(cliente)).getCnpj() );
+		}
+
+		System.out.println("Cliente desde: " + aberturaConta.escreverPorExtenso() );
+		System.out.println("Saldo: " + saldo);
+
+	}
+
 	// GETTERS
 	
 	public int getNConta(){
@@ -38,32 +66,5 @@ abstract class Conta{
 	
 	public float getSaldo(){
 		return saldo;
-	}
-	
-	// o que aconteceria se o programador quiser reescrever esse metodo?
-	public final void depositar(float valor){
-		if (valor > 0){
-			saldo += valor;
-		}
-	}
-	
-	// um metodo abstract tem a finalidade de obrigar que ele sejam implementado na classe filha.
-	// ele não tem as chaves pois não tem nenhuma implementação
-	//public abstract void sacar(float valor);
-	public void imprimirExtrato(){
-		System.out.println("Cliente: " + cliente.getNome() );
-		System.out.println("Número da conta: " + nConta);
-		
-		// necessário saber se a variavel cliente contem uma instancia da classe PessoaFisica, para poder chamar o metodo getCpf
-		// essa decisão é tomada em tempo de execução
-		if (cliente instanceof PessoaFisica) {
-			System.out.println("CPF: " + ( (PessoaFisica)(cliente)).getCpf() );	// necessário fazer a conversão do tipo em tempo de execução para poder chamar o metodo da classe correspondente. No caso, o metodo geCpf() pertence a PessoaFisica
-		} else {
-			System.out.println("CNPJ: " + ( (PessoaJuridica)(cliente)).getCnpj() );
-		}
-		
-		System.out.println("Cliente desde: " + aberturaConta.escreverPorExtenso() );
-		System.out.println("Saldo: " + saldo);
-
 	}
 }

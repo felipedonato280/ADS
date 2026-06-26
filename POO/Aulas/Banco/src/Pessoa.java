@@ -3,6 +3,8 @@ public abstract class Pessoa{
 	protected Data nascimento;	// apesar do nome nascimento, vai ser um atributo genérico: pode ser quando a pessoa fisica nasceu OU quando a pessoa juridica foi aberta
 	protected String endereco;
 
+	// CONSTRUCTOR
+
 	public Pessoa(String nome, Data nascimento, String endereco){
 		setNome(nome);
 		setEndereco(endereco);

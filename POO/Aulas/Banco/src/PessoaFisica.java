@@ -1,10 +1,12 @@
 class PessoaFisica extends Pessoa{
-
 	private String cpf;
 	private String rg;
-	
+
+	// CONSTRUCTOR
+
 	public PessoaFisica(String cpf, String rg, String nome, Data nascimento, String endereco){
 		super(nome, nascimento, endereco);
+
 		setRg(rg);
 		
 		if (CpfCnpjUtils.isValidCPF(cpf))
@@ -13,9 +15,26 @@ class PessoaFisica extends Pessoa{
 			System.out.println("CPF inválido: será necessário atualizar o documento para validar o cadastro.");
 	}
 
+	// METODOS PRINCIPAIS
+
+	@Override
+	public String toString(){
+		String msg = "";
+		msg += "Nome: " + nome + "\n";
+		msg += "Nascimento: " + nascimento.escreverAbreviado() + "\n";
+		msg += "CPF: " + cpf + "\n";
+		msg += "RG: " + rg + "\n";
+
+		return msg;
+	}
+
+	// SETTERS
+
 	public void setRg(String rg){
 		this.rg = rg;
 	}
+
+	// GETTERS
 
 	public String getCpf(){
 		return cpf;
@@ -24,15 +43,4 @@ class PessoaFisica extends Pessoa{
 	public String getRg(){
 		return rg;
 	}
-
-	@Override
-	public String toString(){
-		String msg = "";
-		msg = msg + "Nome: " + getNome() + "\n";
-		msg = msg + "Nascimento: " + getNascimento() + "\n";
-		msg = msg + "CPF: " + cpf + "\n";
-		msg = msg + "RG: " + rg + "\n";
-		
-		return msg;
-	}          
 }

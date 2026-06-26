@@ -1,13 +1,15 @@
 import java.time.YearMonth;
+// import da biblioteca time, antes estava usando apenas month
+// mas causava um bug, como nao guardava o ano, se fossem meses iguais de anos diferentes contabilizava a tarifa.
 
 public class ContaCorrente extends Conta{
-	private float limite;
-	private float tarifasAcumuladasMes;
-	private int quantidadeSaques;
-	private YearMonth periodoAtual;
+	private static final int LIMITE_SAQUES_GRATIS = 4;      // Constante para armazenar o limite de saques por mes
+	private static final float TARIFA_SAQUE_EXCEDENTE = 3f; // Constante para armazenar o valor da tarifa (bigdecimal seria a melhor pratica)
 
-	private static final int LIMITE_SAQUES_GRATIS = 4;
-	private static final float TARIFA_SAQUE_EXCEDENTE = 3f;
+	private float limite;
+	private float tarifasAcumuladasMes;  // valor das tarifas acumuladas no mes
+	private int quantidadeSaques;        // Guarda a quantidade de saques do mes
+	private YearMonth periodoAtual;      // Guarda o ano/mes atual
 
 	// CONSTRUCTOR
 
@@ -20,11 +22,13 @@ public class ContaCorrente extends Conta{
 			this.limite = 200f;
 		}
 
-		this.tarifasAcumuladasMes = 0f;
-		this.quantidadeSaques = 0;
-		this.periodoAtual = YearMonth.now();
+		this.tarifasAcumuladasMes = 0f;       // Inicia o valor acumulado de tarifas na abertura da conta
+		this.quantidadeSaques = 0;            // Inicia a quantidade de saques realizadas na abertura da conta
+		this.periodoAtual = YearMonth.now();  // Inicia o periodo atual com base na criacao da conta
 
 	}
+
+	// METODOS PRINCIPAIS
 
 	// O metodo sacar é reimplementado, pois ele tem funcinamento diferente (polimorfismo). O saque da conta corrente leva em conta também o limite disponível do cliente
 	public void sacar(float valor){
@@ -40,10 +44,10 @@ public class ContaCorrente extends Conta{
 			return;
 		}
 
-		if(periodoSaque.equals(periodoAtual)){
+		if(periodoSaque.equals(periodoAtual)){  // Se a data do saque for igual ao periodo atual, atualiza a contagem
 			quantidadeSaques++;
 		} else {
-			periodoAtual = periodoSaque;
+			periodoAtual = periodoSaque;  // Se nao, atualiza o periodo atual, com a data do saque
 			tarifasAcumuladasMes = 0f;
 			quantidadeSaques = 1;
 		}
