@@ -19,6 +19,8 @@ class AppBanco {
 		c1.sacar(10);
 		c1.sacar(10);
 		c1.sacar(10);
+		c1.sacar(10);
+		c1.sacar(10);
 
 		c1.imprimirExtrato();
 	}

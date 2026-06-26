@@ -5,7 +5,7 @@ public class Data {
 	private int mes;
 	private int ano;
 
-	// método construtor da classe
+	// metodo construtor da classe
 	// não tem retorno
 	// tem o mesmo nome da classe
 	public Data (int dia, int mes, int ano){
@@ -18,6 +18,8 @@ public class Data {
 		setAno(ano);
 
 	}
+
+	// SETTERS
 
 	// metodo set sempre terá a seguinte definição: public void setNomedoAtributo(<tipo do atributo>)
 	public void setDia(int dia) {
@@ -51,7 +53,7 @@ public class Data {
 	}
 
 	// Desafio para fazer em casa:
-	// criar um método para validação de numeros, eliminando a necessidade dos if de validação do dia/mes/ano
+	// criar um metodo para validação de numeros, eliminando a necessidade dos if de validação do dia/mes/ano
 	public void ajustarData(int dia, int mes, int ano){
 
 		setMes(mes);
@@ -78,7 +80,9 @@ public class Data {
 		
 		return false;
 	}
-	
+
+	// GETTERS
+
 	// metodo get sempre terá a seguinte definição: public <tipo do atributo> getNomedoAtributo()
 	public int getDia() {
 		return dia;	// return NomedoAtributo

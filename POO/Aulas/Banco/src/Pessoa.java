@@ -1,4 +1,4 @@
-abstract class Pessoa{
+public abstract class Pessoa{
 	protected String nome;
 	protected Data nascimento;	// apesar do nome nascimento, vai ser um atributo genérico: pode ser quando a pessoa fisica nasceu OU quando a pessoa juridica foi aberta
 	protected String endereco;
@@ -8,7 +8,9 @@ abstract class Pessoa{
 		setEndereco(endereco);
 		setNascimento(nascimento);
 	}
-	
+
+	// SETTERS
+
 	public void setNome(String nome){
 				
 		if (nome.length() > 10){
@@ -30,6 +32,8 @@ abstract class Pessoa{
 	public void setNascimento(Data nascimento){
 		this.nascimento = nascimento;
 	}
+
+	// GETTERS
 	
 	public String getNome(){
 		return nome;

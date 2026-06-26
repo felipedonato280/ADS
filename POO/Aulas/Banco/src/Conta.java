@@ -7,7 +7,9 @@ abstract class Conta{
 	protected int nConta;
 	protected Data aberturaConta;
 	protected float saldo;
-	
+
+	// CONSTRUCTOR
+
 	public Conta(Pessoa cliente){
 		this.cliente = cliente;
 		saldo = 0f;
@@ -27,6 +29,8 @@ abstract class Conta{
 		
 		aberturaConta = new Data(dia, mes, ano);
 	}
+
+	// GETTERS
 	
 	public int getNConta(){
 		return nConta;
@@ -43,17 +47,17 @@ abstract class Conta{
 		}
 	}
 	
-	// um método abstract tem a finalidade de obrigar que ele sejam implementado na classe filha.
+	// um metodo abstract tem a finalidade de obrigar que ele sejam implementado na classe filha.
 	// ele não tem as chaves pois não tem nenhuma implementação
 	//public abstract void sacar(float valor);
 	public void imprimirExtrato(){
 		System.out.println("Cliente: " + cliente.getNome() );
 		System.out.println("Número da conta: " + nConta);
 		
-		// necessário saber se a variavel cliente contem uma instancia da classe PessoaFisica, para poder chamar o método getCpf
+		// necessário saber se a variavel cliente contem uma instancia da classe PessoaFisica, para poder chamar o metodo getCpf
 		// essa decisão é tomada em tempo de execução
 		if (cliente instanceof PessoaFisica) {
-			System.out.println("CPF: " + ( (PessoaFisica)(cliente)).getCpf() );	// necessário fazer a conversão do tipo em tempo de execução para poder chamar o método da classe correspondente. No caso, o método geCpf() pertence a PessoaFisica
+			System.out.println("CPF: " + ( (PessoaFisica)(cliente)).getCpf() );	// necessário fazer a conversão do tipo em tempo de execução para poder chamar o metodo da classe correspondente. No caso, o metodo geCpf() pertence a PessoaFisica
 		} else {
 			System.out.println("CNPJ: " + ( (PessoaJuridica)(cliente)).getCnpj() );
 		}
