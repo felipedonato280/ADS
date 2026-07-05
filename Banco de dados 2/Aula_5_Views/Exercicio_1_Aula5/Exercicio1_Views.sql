@@ -2,7 +2,7 @@
 
 --1. Os nomes dos fiscais com salário maior do que 10.000,00. 
 
-CREATE VIEW v1_salario AS
+CREATE OR REPLACE VIEW v1_salario AS
 SELECT nomfis
 FROM fiscal
 WHERE salario > 10000.00;
@@ -139,12 +139,38 @@ SELECT * FROM v7;
 
 --8. Os nomes dos produtos e os nomes dos estantes que vendem estes produtos. 
 
+CREATE VIEW v8 AS
+SELECT p.nomprod, e.nomest
+FROM produto p
+INNER JOIN vende v
+ON p.codprod = v.codprod
+INNER JOIN estande e
+ON v.codest = e.codest;
 
+SELECT * FROM v8;
 
 --9. Os nomes dos produtos que são vendidos pelo valor mais baixo. 
 
-
+CREATE VIEW v9 AS
+SELECT DISTINCT p.nomprod
+FROM produto p
+INNER JOIN vende v
+USING(codprod)
+WHERE v.valor = (
+    SELECT MIN(valor)
+    FROM vende
+);
 
 --10. Os nomes dos produtos vendidos pelos estandes controlados pelo fiscal 
 --denominado “fulano”. 
 
+CREATE VIEW v10 AS
+SELECT p.nomprod
+FROM fiscal f
+INNER JOIN estande e
+USING(codfis)
+INNER JOIN vende v
+USING(codest)
+INNER JOIN produto p
+USING(codprod)
+WHERE f.nomfis = 'fulano';
