@@ -5,7 +5,6 @@ public class Turma {
     private final Disciplina disc;
     private final ArrayList<Aluno> alunos;
     private final ArrayList<Data> encontros;
-    private int qtdMatriculados;
 
     private static final int TAMANHO_TURMA = 35;
 
@@ -13,8 +12,6 @@ public class Turma {
         this.disc = disc;
         this.alunos = new ArrayList<>();
         this.encontros = new ArrayList<>();
-
-        qtdMatriculados = 0;
     }
 
     public void adicionarEncontro(Data encontro){
@@ -22,9 +19,8 @@ public class Turma {
     }
 
     public void adicionarAluno(Aluno aluno){
-        if(qtdMatriculados < TAMANHO_TURMA){
+        if(alunos.size() < TAMANHO_TURMA){
             alunos.add(aluno);
-            qtdMatriculados ++;
             System.out.println("Aluno " + aluno.getNome() + " Adicionado a turma");
         }
         else{
