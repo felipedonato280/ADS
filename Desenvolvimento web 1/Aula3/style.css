@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Evita que o padding altere o tamanho final dos elementos */
+}
+
+#header{
+    position: fixed;
+    width: 100vw;
+    background-color: #dac120;
+    z-index: 100;
+}
+
+.div-logo-nome, .navbar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-opcao{
+    margin: 1vh 1vw;
+}
+
+#main{
+    padding: 15vh 10vw 4vh;
+}
+
+.div-produtos {
+    display: grid;
+    /* Ajusta automaticamente a quantidade de colunas com base no espaço disponível */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.card {
+    border: #dac120 2px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
