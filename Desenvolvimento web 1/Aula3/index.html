@@ -1,96 +1,82 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generico</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Cimed</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="container">
-        <header id="header">
-            <div class="div-logo-nome">
-                <div>
-                    <p>G</p>
-                </div>
+    <header class="header">
+        <a href="#" class="logo">
+            <span>G</span>
+            <h1>Cimed</h1>
+        </a>
 
-                <div>
-                    <h1>Cimed</h1>
-                </div>
+        <nav class="navbar">
+            <a href="#">Home</a>
+            <a href="#produtos">Produtos</a>
+            <a href="#sobre">Sobre nós</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="produtos">
+
+            <h2>Produtos</h2>
+
+            <div class="produtos">
+                <article class="card">
+                    <img src="https://product-data.raiadrogasil.io/images/3821266.webp" alt="Dipirona Cimed">
+                    <h3>Dipirona</h3>
+                    <p class="preco">R$ 5,20</p>
+                    <a href="#">Mais informações</a>
+                </article>
+
+                <article class="card">
+                    <img src="https://drogariaspacheco.vteximg.com.br/arquivos/ids/1124420-1000-1000/116963---cimegripe-400mg-cimed-20-capsulas-3.jpg?v=638270210038800000" alt="Cimegripe">
+                    <h3>Cimegripe</h3>
+                    <p class="preco">R$ 20,90</p>
+                    <a href="#">Mais informações</a>
+                </article>
+
+                <article class="card">
+                    <img src="https://www.cliquefarma.com.br/cdn-cgi/imagedelivery/HWe2hc9laId8jMwJ0Cw8sw/paracetamol-750-mg-com-20-comprimidos-cimed-generico.png/standard" alt="Paracetamol">
+                    <h3>Paracetamol</h3>
+                    <p class="preco">R$ 10,50</p>
+                    <a href="#">Mais informações</a>
+                </article>
+
+                <article class="card">
+                    <img src="https://d1jgmae0hcnr1i.cloudfront.net/Custom/Content/Products/24/95/249525_tadalafila-20mg-c-4cp-rev-p141631_l1_638383167404336862.png" alt="Tadalafila">
+                    <h3>Tadalafila</h3>
+                    <p class="preco">R$ 0,90</p>
+                    <a href="#">Mais informações</a>
+                </article>
             </div>
+        </section>
 
-            <div>
-                <nav class="navbar">  
-                    <div class="div-opcao">
-                        <a href="#">HOME</a>
-                    </div>
+        <section id="sobre">
 
-                    <div class="div-opcao">
-                        <a href="#Produtos">Produtos</a>
-                    </div>
+            <h2>Sobre nós</h2>
 
-                    <div class="div-opcao">
-                        <a href="#Quem-Somos">Sobre nós</a>
-                    </div>
-                </nav>
-            </div>
-        </header>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Tempore sint odit dolores quidem autem necessitatibus
+                accusamus molestiae laborum repellat corporis quia saepe
+                sunt, harum incidunt ipsum. Tempora magnam repellat ut.
+            </p>
 
-        <main id="main">
-            <div>
-                <section id="Produtos">
-                    <div>
-                        <h1>Produtos</h1>
-                    </div>
+        </section>
 
-                    <div class="div-produtos">
-                        <div class="card">
-                            <img src="https://product-data.raiadrogasil.io/images/3821266.webp" alt="imagem de uma dipirona da cimed">
-                            <h1>Dipirona</h1>
-                            <p>5,20</p>
-                            <a href="">mais info</a>
-                        </div>
+    </main>
 
-                        <div class="card">
-                            <img src="https://drogariaspacheco.vteximg.com.br/arquivos/ids/1124420-1000-1000/116963---cimegripe-400mg-cimed-20-capsulas-3.jpg?v=638270210038800000" alt="imagem de um cimegripe da cimed">
-                            <h1>Cimegripe</h1>
-                            <p>20,90</p>
-                            <a href="">mais info</a>
-                        </div>
+    <footer>
 
-                        <div class="card">
-                            <img src="https://www.cliquefarma.com.br/cdn-cgi/imagedelivery/HWe2hc9laId8jMwJ0Cw8sw/paracetamol-750-mg-com-20-comprimidos-cimed-generico.png/standard" alt="imagem de um paracetamol da cimed">
-                            <h1>Paracetamol</h1>
-                            <p>10,50</p>
-                            <a href="">mais info</a>
-                        </div>
+        <p>© 2026 - Desenvolvido por Felipe Donato</p>
 
-                        <div class="card">
-                            <img src="https://d1jgmae0hcnr1i.cloudfront.net/Custom/Content/Products/24/95/249525_tadalafila-20mg-c-4cp-rev-p141631_l1_638383167404336862.png" alt="imagem de um tadalafila da cimed">
-                            <h1>Tadalafila</h1>
-                            <p>0,90</p>
-                            <a href="">mais info</a>
-                        </div>
-                    </div>
-                </section>
+    </footer>
 
-                <section id="Quem-Somos">
-                    <div>
-                        <div>
-                            <h1>Sobre nós</h1>
-                        </div>
-
-                        <div>
-                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore sint odit dolores quidem autem necessitatibus accusamus molestiae laborum repellat corporis quia saepe sunt, harum incidunt ipsum. Tempora magnam repellat ut.</p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </main>
-
-        <footer id="footer">
-            <p>by @FelipeDonato</p>
-        </footer>
-    </div>
 </body>
 </html>
