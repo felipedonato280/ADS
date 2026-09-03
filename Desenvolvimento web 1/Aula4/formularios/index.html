@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            margin-bottom: 30px;
+        }
+
+        .campo{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>FORMULARIO TIPO TEXTO</h1>
+
+        <form action="processa.php">
+            <div class="campo">
+                <div>
+                    <label for="nome">Primeiro Nome:</label>
+                </div>
+                <div>
+                    <input id="nome" type="text" value="nome" name="nome">
+                </div>
+            </div>
+
+            <div class="campo">
+                <div>
+                    <label for="sobrenome">Sobrenome:</label>
+                </div>
+                <div>
+                    <input id="sobrenome" type="text" value="sobrenome" name="sobrenome">  
+                </div>
+            </div>
+
+            <div class="campo">
+                <div>
+                    <label for="email">Email:</label>
+                </div>
+                <div>
+                    <input id="email" type="email" value="email" name="email">
+                </div>
+            </div>
+
+            <div class="campo">
+                <div>
+                    <label for="senha">Senha:</label>
+                </div>
+
+                <div>
+                    <input id="senha" type="password" value="senha" name="senha">
+                </div>
+            </div>
+            
+            <div>
+                <input type="submit" name="submit">
+            </div>
+        </form>
+    </div>
+
+    <div class="container">
+        <h1>FORMULARIO TIPO MARCACAO</h1>
+
+        <form action="">
+            <div>
+                <input id="html" type="radio" value="HTML" name="escolha">
+                <label for="html">HTML</label>
+            </div>
+
+            <div>
+                <input id="css" type="radio" value="CSS" name="escolha">
+                <label for="css">CSS</label>
+            </div>
+
+            <div>
+                <input id="js" type="radio" value="JavaScript" name="escolha">
+                <label for="js">JavaScript</label>
+            </div>
+
+            <div>
+                <input id="python" type="radio" value="Python" name="escolha">
+                <label for="python">Python</label>
+            </div>
+        </form>
+    </div>
+
+    <div class="container"></div>
+</body>
+</html>
