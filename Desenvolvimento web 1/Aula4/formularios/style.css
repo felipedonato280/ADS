@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --fundo-body: #121212;
+    --fundo-form: #1e1e1e;
+    --cor-fonte: #fff;
+}
+
+body {
+    background-color: var(--fundo-body);
+    color: var(--cor-fonte);
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.formulario {
+    width: 90vw;
+    max-width: 480px;
+    background-color: var(--fundo-form);
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.conteudo {
+    display: flex;
+    flex-direction: column;
+    padding: 30px 25px;
+}
+
+h1 {
+    font-size: 1.4rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4da6ff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+form {
+    width: 100%;
+}
+
+.campo {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-size: 0.95rem;
+    color: #cccccc;
+}
+
+/* Estilo padronizado para campos de texto, email, senha, data e select */
+.input-texto, select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid #333333;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-texto:focus, select:focus {
+    border-color: #4da6ff;
+}
+
+/* Ajuste específico para Radio e Checkbox ficarem alinhados com o texto */
+.campo:has(.input-op) {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.input-op {
+    accent-color: #4da6ff; /* Muda a cor da seleção */
+    cursor: pointer;
+}
+
+.enviar{
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    border: none;
+    background-color: #4da6ff;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.enviar:hover {
+    background-color: #3b82c6;
+}
+
+.enviar:active {
+    transform: scale(0.98);
+}

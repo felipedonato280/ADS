@@ -4,90 +4,152 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        .container{
-            margin-bottom: 30px;
-        }
-
-        .campo{
-            margin-bottom: 10px;
-        }
-    </style>
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>FORMULARIO TIPO TEXTO</h1>
+    <div class="formulario">
+        <div class="conteudo">
+            <h1>FORMULARIO TIPO TEXTO</h1>
 
-        <form action="processa.php">
-            <div class="campo">
-                <div>
-                    <label for="nome">Primeiro Nome:</label>
-                </div>
-                <div>
-                    <input id="nome" type="text" value="nome" name="nome">
-                </div>
-            </div>
-
-            <div class="campo">
-                <div>
-                    <label for="sobrenome">Sobrenome:</label>
-                </div>
-                <div>
-                    <input id="sobrenome" type="text" value="sobrenome" name="sobrenome">  
-                </div>
-            </div>
-
-            <div class="campo">
-                <div>
-                    <label for="email">Email:</label>
-                </div>
-                <div>
-                    <input id="email" type="email" value="email" name="email">
-                </div>
-            </div>
-
-            <div class="campo">
-                <div>
-                    <label for="senha">Senha:</label>
+            <form action="processa.php" method="post">
+                <div class="campo">
+                    <div>
+                        <label for="nome">Primeiro Nome:</label>
+                    </div>
+                    <div>
+                        <input id="nome" class="input-texto" type="text" required placeholder="nome" name="nome">
+                    </div>
                 </div>
 
-                <div>
-                    <input id="senha" type="password" value="senha" name="senha">
+                <div class="campo">
+                    <div>
+                        <label for="sobrenome">Sobrenome:</label>
+                    </div>
+                    <div>
+                        <input id="sobrenome" class="input-texto" type="text" required placeholder="sobrenome" name="sobrenome">  
+                    </div>
                 </div>
-            </div>
-            
-            <div>
-                <input type="submit" name="submit">
-            </div>
-        </form>
+
+                <div class="campo">
+                    <div>
+                        <label for="data-nasc">Data de nascimento:</label>
+                    </div>
+                    <div>
+                        <input id="data-nasc" class="input-texto" type="date" required name="data-nasc">
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <div>
+                        <label for="UF">UF:</label>
+                    </div>
+
+                    <div>
+                        <select id="UF" name="UF">
+                            <option value="RS">RS</option>
+                            <option value="SC">SC</option>
+                            <option value="PR">PR</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <div>
+                        <label for="email">Email:</label>
+                    </div>
+                    <div>
+                        <input id="email" class="input-texto" type="email" required placeholder="email" name="email">
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <div>
+                        <label for="senha">Senha:</label>
+                    </div>
+
+                    <div>
+                        <input id="senha" class="input-texto" type="password" required placeholder="senha" name="senha">
+                    </div>
+                </div>
+                
+                <div>
+                    <input class="enviar" type="submit">
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="container">
-        <h1>FORMULARIO TIPO MARCACAO</h1>
+    <div class="formulario">
+        <div class="conteudo">
+            <h1>FORMULARIO TIPO RADIO</h1>
 
-        <form action="">
-            <div>
-                <input id="html" type="radio" value="HTML" name="escolha">
-                <label for="html">HTML</label>
-            </div>
+            <form action="processa.php">
+                <div class="campo">
+                    <input id="html-radio" class="input-op" type="radio" name="escolha" value="HTML">
+                    <label for="html-radio">HTML</label>
+                </div>
 
-            <div>
-                <input id="css" type="radio" value="CSS" name="escolha">
-                <label for="css">CSS</label>
-            </div>
+                <div class="campo">
+                    <input id="css-radio" class="input-op" type="radio" name="escolha" value="CSS">
+                    <label for="css-radio">CSS</label>
+                </div>
 
-            <div>
-                <input id="js" type="radio" value="JavaScript" name="escolha">
-                <label for="js">JavaScript</label>
-            </div>
+                <div class="campo">
+                    <input id="js-radio" class="input-op" type="radio" name="escolha" value="JavaScript">
+                    <label for="js-radio">JavaScript</label>
+                </div>
 
-            <div>
-                <input id="python" type="radio" value="Python" name="escolha">
-                <label for="python">Python</label>
-            </div>
-        </form>
+                <div class="campo">
+                    <input id="python-radio" class="input-op" type="radio" name="escolha" value="Python">
+                    <label for="python-radio">Python</label>
+                </div>
+
+                <div>
+                    <input class="enviar" type="submit">
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div class="container"></div>
+    <div class="formulario">
+        <div class="conteudo">
+            <h1>FORMULARIO TIPO CHECKBOX</h1>
+
+            <form action="processa.php">
+                <div class="campo">
+                    <input id="html-checkbox" class="input-op" type="checkbox" name="linguagem" value="HTML">
+                    <label for="html-checkbox">HTML</label>
+                </div>
+
+                <div class="campo">
+                    <input id="css-checkbox" class="input-op" type="checkbox" name="linguagem" value="CSS">
+                    <label for="css-checkbox">CSS</label>
+                </div>
+
+                <div class="campo">
+                    <input id="js-checkbox" class="input-op" type="checkbox" name="linguagem" value="JavaScript">
+                    <label for="js-checkbox">JavaScript</label>
+                </div>
+                
+                <div class="campo">
+                    <input id="python-checkbox" class="input-op" type="checkbox" name="linguagem" value="Python">
+                    <label for="python-checkbox">Python</label>
+                </div>
+
+                <div class="campo">
+                    <label for="outro">Outro:</label>
+                    <textarea id="outro" rows="2" placeholder="Outros" name="outro"></textarea>
+                </div>
+
+                <div>
+                    <input class="enviar" type="submit">
+                </div>
+
+                <div>
+                    <input class="enviar" type="reset">
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
