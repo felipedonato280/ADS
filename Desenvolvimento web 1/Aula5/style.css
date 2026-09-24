@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Playwrite+CU+Guides&display=swap');
+
+:root {
+    --fonte-cor: #2b2b2b;
+    --fundo-pagina: #e2d7c5;      /* Tom de mesa/fundo de madeira claro */
+    --fundo-carta: #f6f1df;       /* Cor de papel envelhecido */
+    --borda-carta: #d8ceb8;
+    --destaque: #8b5a2b;          /* Tom marrom para links e destaques */
+    --destaque-hover: #5c3a1c;
+}
+
+body {
+    text-align: justify;
+    line-height: 1.6;
+    font-family: "Playwrite CU Guides", cursive; /* Fonte estilo manuscrita legível para o corpo */
+    font-size: 1.4rem;
+    color: var(--fonte-cor);
+    background-color: var(--fundo-pagina);
+    margin: 0;
+    padding: 20px 0;
+}
+
+/* Container que simula a folha de papel/carta */
+.container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 40px;
+    background-color: var(--fundo-carta);
+    border: 1px solid var(--borda-carta);
+    border-radius: 4px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 
+                0 2px 5px rgba(0, 0, 0, 0.05); /* Efeito de papel elevado */
+}
+
+/* Tipografia e Títulos */
+h1, h2, h3 {
+    font-family: "Playwrite CU Guides", cursive;
+    text-align: center;
+    color: #1a1a1a;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 2.2rem;
+    border-bottom: 2px dashed var(--borda-carta);
+    padding-bottom: 15px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: 40px;
+    color: var(--destaque);
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin-top: 25px;
+}
+
+p {
+    margin-bottom: 15px;
+    text-indent: 20px;
+}
+
+em {
+    font-weight: bold;
+    color: var(--destaque);
+}
+
+/* Links em geral */
+a {
+    color: var(--destaque);
+    text-decoration: underline;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: var(--destaque-hover);
+}
+
+/* Menu de Navegação (Estilo Cartões/Selos) */
+#menu-principal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin: 30px 0;
+}
+
+.btn-nav .a-btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #ede5cc;
+    border: 1px dashed var(--destaque);
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-nav .a-btn:hover {
+    background-color: var(--destaque);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+/* Listas de Barreiras */
+ul.barreiras {
+    list-style-type: '✍️ ';
+    padding-left: 30px;
+    margin-bottom: 25px;
+}
+
+ul.barreiras li {
+    margin-bottom: 8px;
+}
+
+/* Estilização da Imagem e Moldura */
+.div-imagem {
+    text-align: center;
+    margin: 30px 0;
+}
+
+figure {
+    display: inline-block;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid var(--borda-carta);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: rotate(-1deg); /* Leve inclinação de foto antiga */
+}
+
+.imagem {
+    max-width: 100%;
+    height: auto;
+    max-height: 350px;
+    border-radius: 2px;
+}
+
+figcaption {
+    font-size: 1.1rem;
+    margin-top: 8px;
+    color: #666;
+}
+
+/* Rodapé */
+footer {
+    text-align: center;
+    font-size: 1.1rem;
+    border-top: 1px solid var(--borda-carta);
+    padding-top: 15px;
+}
