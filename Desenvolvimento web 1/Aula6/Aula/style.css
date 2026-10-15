@@ -1,0 +1,13 @@
+#content{
+    width: 90%;
+    margin: 10px auto;
+    padding: 20px;
+    background-color: #DDD;
+}
+
+.equipe{
+    margin: 20px 0;
+    padding: 10px;
+    width: 30%;
+    border: 2px solid black;
+}
