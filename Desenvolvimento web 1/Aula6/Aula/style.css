@@ -73,11 +73,26 @@ header{
     transform:translateY(-8px);
 }
 
+#historia h2{
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+
+#historia p{
+    margin: 20px 0;
+}
+
 #equipes{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     column-gap: 20px;
+}
+
+#equipes h2{
+    width: 100%;
+    font-size: 1.5em;
+    margin: 20px 0;
 }
 
 .equipe{
@@ -86,8 +101,18 @@ header{
     border: 1px solid #000;
     border-radius: 8px;
     padding: 5px;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-#equipes h2{
-    width: 100%;
+.equipe img{
+    width: 15vw;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.equipe ul li{
+    margin: 20px;
 }
