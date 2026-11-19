@@ -7,10 +7,16 @@ $(document).ready(function(){
 
         if(peso && altura > 0){
             imc = (peso / (altura ** 2)).toFixed(2);
-            $("#dados").append(`<li>${nome} seu IMC é: ${imc}<input type="button" value="Remover" class= "remover"></li>`)
+            $("#dados").append(`<li>${nome} seu IMC é: ${imc}<input type="button" value="Remover" class="remover"></li>`)
         }else{
             alert("Valores invalidos!");
         }
+
+        /*
+        $(".remover").click(function(){
+            alert("oi");
+        });
+        */
     });
 
     $("#apagar").click(function(){
@@ -18,4 +24,12 @@ $(document).ready(function(){
             $("#dados").empty()
         }
     });
+
+    $("#dados").on("click", ".remover", function(){
+        /*$(this).parent().remove();*/
+        if(confirm("Deseja apagar este elemento?")){
+            $(this).closest("li").remove();
+        }
+    });
+
 });
